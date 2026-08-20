@@ -1,0 +1,20 @@
+# NAS 部署版（image 拉取模式，无需本机构建）
+# 用法：在飞牛 Docker → 项目 → 新建 → 粘贴本文件内容
+services:
+  media-hive:
+    image: ghcr.io/zl840918/media-hive:latest
+    container_name: media-hive
+    restart: unless-stopped
+    ports:
+      - "8890:8890"
+    environment:
+      # 必填：TMDB API Key
+      - MH_TMDB_API_KEY=${MH_TMDB_API_KEY:-}
+      # 必填：管理员 Key（首次启动创建用）
+      - MH_BOOTSTRAP_ADMIN_KEY=${MH_BOOTSTRAP_ADMIN_KEY:-}
+      # guest 可解锁的最高清晰度（"" 表示不限）
+      - MH_GUEST_MAX_QUALITY=720P
+      - TZ=Asia/Shanghai
+    volumes:
+      # 左边=宿主机路径（真实目录），右边=容器内（别改）
+      - /vol1/1000/docker/media-hive/data:/data
