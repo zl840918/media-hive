@@ -48,7 +48,8 @@ jobs:
         with:
           context: .
           push: true
+          # 固定包名 media-hive-core（media-hive 旧私有包残留，换名避免权限冲突）
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
-            ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
+            ghcr.io/zl840918/media-hive-core:latest
+            ghcr.io/zl840918/media-hive-core:${{ github.sha }}
+            ghcr.io/zl840918/media-hive-core:${{ steps.version.outputs.version }}

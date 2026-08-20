@@ -2,7 +2,7 @@
 # 用法：在飞牛 Docker → 项目 → 新建 → 粘贴本文件内容
 services:
   media-hive:
-    image: ghcr.io/zl840918/media-hive:latest
+    image: ghcr.io/zl840918/media-hive-core:latest
     container_name: media-hive
     restart: unless-stopped
     ports:
