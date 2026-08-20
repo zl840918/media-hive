@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # 数据库
     database_url: str = "sqlite:///./media_hive.db"
 
-    # TMDB
+    # TMDB（api.tmdb.org 国内可直连；themoviedb.org 域名需代理）
     tmdb_api_key: str = ""
     tmdb_base_url: str = "https://api.tmdb.org/3"
 

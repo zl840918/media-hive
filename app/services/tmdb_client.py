@@ -16,17 +16,16 @@ class TmdbClient:
         self.api_key = api_key or settings.tmdb_api_key
         self.base_url = settings.tmdb_base_url
 
-    def _headers(self) -> dict:
-        return {"Authorization": f"Bearer {self.api_key}"}
-
     def _get(self, path: str, params: dict | None = None) -> dict:
         if not self.api_key:
             raise TmdbError("TMDB_API_KEY 未配置", 500)
+        # TMDB v3 明文 key：必须用 query 参数 api_key=（Bearer 仅支持 v4 token）
+        query = dict(params or {})
+        query["api_key"] = self.api_key
         try:
             resp = httpx.get(
                 f"{self.base_url}{path}",
-                params=params or {},
-                headers=self._headers(),
+                params=query,
                 timeout=15,
             )
         except httpx.HTTPError as e:
