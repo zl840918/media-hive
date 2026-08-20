@@ -1,0 +1,18 @@
+services:
+  media-hive:
+    build: .
+    container_name: media-hive
+    restart: unless-stopped
+    ports:
+      - "8890:8890"
+    environment:
+      # 必填：TMDB API Key（https://www.themoviedb.org/settings/api 申请）
+      - MH_TMDB_API_KEY=${MH_TMDB_API_KEY:-}
+      # 首次启动的管理员 Key；留空则自动生成并打印在日志里
+      - MH_BOOTSTRAP_ADMIN_KEY=${MH_BOOTSTRAP_ADMIN_KEY:-}
+      # guest 能解锁的最高清晰度（"" 表示不限）
+      - MH_GUEST_MAX_QUALITY=720P
+      - TZ=Asia/Shanghai
+    volumes:
+      # 数据库持久化：左边宿主目录 / 右边容器 /data
+      - ./data:/data
